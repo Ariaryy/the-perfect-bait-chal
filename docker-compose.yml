@@ -1,0 +1,21 @@
+services:
+  phishing-challenge:
+    build: .
+    container_name: hashvault_phishing
+    ports:
+      - "1439:1439"
+    volumes:
+      - ./progress.json:/app/progress.json
+    restart: always
+    # Security Hardening
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+        reservations:
+          memory: 128M
